@@ -10,6 +10,10 @@ import { EmailComponent } from './email/email.component';
 import { CompanyNameComponent } from './company-name/company-name.component';
 import { MissionComponent } from './mission/mission.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OfferComponent } from './offer/offer.component';
+import { InvestmentsComponent } from './investments/investments.component';
+import { FinanceComponent } from './finance/finance.component';
+import { ErrorsComponent } from './errors/errors.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     EmailComponent,
     CompanyNameComponent,
-    MissionComponent
+    MissionComponent,
+    OfferComponent,
+    InvestmentsComponent,
+    FinanceComponent,
+    ErrorsComponent
   ],
   imports: [
     BrowserModule,
