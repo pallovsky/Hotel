@@ -1,1 +1,5 @@
-Flask
+flask
+flask-sqlalchemy
+flask-login
+flask-Migrate
+psycopg2-binary
