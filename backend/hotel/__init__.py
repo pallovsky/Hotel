@@ -3,6 +3,7 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
@@ -20,13 +21,13 @@ def init_app():
 
 def setup_config(application):
     application.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@localhost:5432/hotel"
-    application.config['SECRET_KEY'] = 'secret-key-goes-here'
+    application.config['SECRET_KEY'] = 'jebac-policje'
 
 
 def initialize_plugins(app, database):
     database.init_app(app)
     migrate.init_app(app, database)
-    from backend.hotel.models.User import User  # line used to initiate migrations
+    from backend.hotel.models.User import User  # add model to initiate migration with flask migrate
 
     login_manager.init_app(app)
 

@@ -17,12 +17,8 @@ def register():
     password = request.form.get('password')
 
     validation = validate_register_request(email, username, password)
-    if not validation.result:
+    if not validation.success:
         return validation.error_response
-
-    user = User.query.filter_by(email=email).first()
-    if user:
-        return bad_request("User with this email already exist in database.")
 
     new_user = User(email=email, username=username, role=3, password=generate_password_hash(password, method='sha256'))
 
