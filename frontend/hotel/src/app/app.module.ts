@@ -14,6 +14,11 @@ import { OfferComponent } from './offer/offer.component';
 import { InvestmentsComponent } from './investments/investments.component';
 import { FinanceComponent } from './finance/finance.component';
 import { ErrorsComponent } from './errors/errors.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import { PanelComponent } from './panel/panel.component';
+import { NavbarGameComponent } from './navbar-game/navbar-game.component';
+import { GamesComponent } from './games/games.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +32,18 @@ import { ErrorsComponent } from './errors/errors.component';
     OfferComponent,
     InvestmentsComponent,
     FinanceComponent,
-    ErrorsComponent
+    ErrorsComponent,
+    PanelComponent,
+    NavbarGameComponent,
+    GamesComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

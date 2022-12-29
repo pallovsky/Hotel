@@ -9,9 +9,13 @@ import {OfferComponent} from "./offer/offer.component";
 import {InvestmentsComponent} from "./investments/investments.component";
 import {FinanceComponent} from "./finance/finance.component";
 import {ErrorsComponent} from "./errors/errors.component";
+import {GamesComponent} from "./games/games.component";
+import {PanelComponent} from "./panel/panel.component";
 
 const routes: Routes = [
   { path: "#", component: HomeComponent },
+  { path: "panel", component: PanelComponent },
+  { path: "games", component: GamesComponent },
   { path: "login", component: LoginComponent },
   { path: "mission", component: MissionComponent },
   { path: "email", component: EmailComponent },
@@ -20,7 +24,6 @@ const routes: Routes = [
   { path: "investments", component: InvestmentsComponent },
   { path: "finance", component: FinanceComponent },
   { path: "errors", component: ErrorsComponent },
-
 ];
 
 @NgModule({
