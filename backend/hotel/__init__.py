@@ -1,13 +1,15 @@
 from flask import Flask
+from flask_authorize import Authorize
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
-
+authorize = Authorize()
 
 def init_app():
     app = Flask(__name__)
@@ -30,6 +32,8 @@ def initialize_plugins(app, database):
     from backend.hotel.models.User import User  # add model to initiate migration with flask migrate
 
     login_manager.init_app(app)
+    authorize.init_app(app)
+    CORS(app)
 
     @login_manager.user_loader
     def load_user(user_id):
