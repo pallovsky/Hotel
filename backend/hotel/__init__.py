@@ -11,6 +11,7 @@ migrate = Migrate()
 login_manager = LoginManager()
 authorize = Authorize()
 
+
 def init_app():
     app = Flask(__name__)
 
@@ -29,7 +30,7 @@ def setup_config(application):
 def initialize_plugins(app, database):
     database.init_app(app)
     migrate.init_app(app, database)
-    from backend.hotel.models.User import User  # add model to initiate migration with flask migrate
+    from backend.hotel.models.User import User, Game  # add model to initiate migration with flask migrate
 
     login_manager.init_app(app)
     authorize.init_app(app)
@@ -46,3 +47,6 @@ def register_blueprints(app):
 
     from backend.hotel.routes.main import main as main_blueprint
     app.register_blueprint(main_blueprint)
+
+    from backend.hotel.routes.games import games as games_blueprint
+    app.register_blueprint(games_blueprint)
