@@ -1,31 +1,11 @@
 from flask import Blueprint, redirect, url_for, request
 from flask_login import login_user, login_required, logout_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash
 
-from backend.hotel import db
-from backend.hotel.models.User import User
+from backend.hotel.models.models import User
 from backend.hotel.routes.helpers import *
-from backend.hotel.routes.validators import validate_register_request
 
 auth = Blueprint('auth', __name__)
-
-
-@auth.route('/register', methods=['POST'])
-def register():
-    email = request.form.get('email')
-    username = request.form.get('username')
-    password = request.form.get('password')
-
-    validation = validate_register_request(email, username, password)
-    if not validation.success:
-        return validation.error_response
-
-    new_user = User(email=email, username=username, role=3, password=generate_password_hash(password, method='sha256'))
-
-    db.session.add(new_user)
-    db.session.commit()
-
-    return created("User was successfully created.")
 
 
 @auth.route('/login', methods=['POST'])

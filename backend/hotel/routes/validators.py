@@ -1,6 +1,6 @@
 import re
 
-from backend.hotel.models.User import User
+from backend.hotel.models.models import User
 from backend.hotel.routes.helpers import bad_request
 
 

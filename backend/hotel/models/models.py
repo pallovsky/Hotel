@@ -36,12 +36,12 @@ class User(UserMixin, db.Model):
     groups = db.relationship('Group', secondary=UserGroup)
     games = db.relationship('Game', secondary=GameUser, back_populates="users")
 
-    def __init__(self, username, email, password, role):
+    def __init__(self, username, email, roles, password):
         self.id = uuid.uuid4()
         self.username = username
         self.email = email
         self.password = password
-        self.role = role
+        self.roles = roles
 
     def __repr__(self):
         return f"<User {self.username}, email {self.email}, role {self.role}>"

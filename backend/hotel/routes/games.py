@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
 
 from backend.hotel import db
-from backend.hotel.models.User import User, Game
+from backend.hotel.models.models import User, Game
 from backend.hotel.response.responses import GameResponse
 from backend.hotel.routes.helpers import created
 
