@@ -1,1 +1,23 @@
-<p>panel works!</p>
+<div class="container">
+  <h3 class="mt-5">Lista użytkowników:</h3>
+  <table class="table mt-2">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nazwa użytkownika</th>
+      <th scope="col">Rola</th>
+      <th scope="col">Email</th>
+      <th scope="col">Ilość aktywnych gier</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users; index as i">
+      <th scope="row">{{i}}</th>
+      <td>{{user.username}}</td>
+      <td>{{user.role}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.games_count}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

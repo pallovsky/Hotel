@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {LoginService} from "../_service/login.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,7 @@ import {LoginService} from "../_service/login.service";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  failureMessage: boolean = false
 
   loginForm = new FormGroup({
     username: new FormControl(''),
@@ -16,18 +18,25 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    private loginService: LoginService
-  ) { }
+    private loginService: LoginService,
+    private router: Router,
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    console.warn(this.loginForm.value);
-    this.loginService.login(
-      this.loginForm.value['username'],
-      this.loginForm.value['password'],
-      this.loginForm.value['remember'],
-    ).subscribe()
+    const username = this.loginForm.value['username']?.toString()!
+    const password = this.loginForm.value['password']?.toString()!
+
+    this.loginService.login(username, password).subscribe(
+      response => {
+        localStorage.setItem('token', response.value)
+        localStorage.setItem('validUntil', response.validUntil.toString())
+        this.router.navigate(['/lists'])
+      },
+      _ => this.failureMessage = true
+    )
   }
 }

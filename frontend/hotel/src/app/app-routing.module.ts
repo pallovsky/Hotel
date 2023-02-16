@@ -13,7 +13,7 @@ import {GamesComponent} from "./games/games.component";
 import {PanelComponent} from "./panel/panel.component";
 
 const routes: Routes = [
-  { path: "#", component: HomeComponent },
+  { path: "", component: HomeComponent },
   { path: "panel", component: PanelComponent },
   { path: "games", component: GamesComponent },
   { path: "login", component: LoginComponent },

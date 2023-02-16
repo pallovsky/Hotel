@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {User} from "../_models/user";
+import {UserService} from "../_service/user.service";
 
 @Component({
   selector: 'app-panel',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PanelComponent implements OnInit {
 
-  constructor() { }
+  users: User[] = [];
+
+  constructor(
+    private userService: UserService
+  ) {
+    this.userService.getUsers().subscribe(
+      response => this.users = response
+    )
+  }
 
   ngOnInit(): void {
+
   }
 
 }

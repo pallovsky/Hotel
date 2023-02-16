@@ -1,7 +1,0 @@
-flask
-flask-sqlalchemy
-flask-login
-flask-Migrate
-flask-cors
-flask_authorize
-psycopg2-binary
