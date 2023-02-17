@@ -4,16 +4,17 @@ import {environment} from "../../environments/environment";
 import {LoginRequest} from "../_requests/login-request";
 import {TokenResponse} from "../_models/token-response";
 import {MessageResponse} from "../_models/message-response";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
 
   constructor(private httpClient: HttpClient) {
   }
 
-  login(username: string, password: string) {
+  login(username: string, password: string): Observable<TokenResponse> {
     return this.httpClient.post<TokenResponse>(
       environment.apiUrl + '/login', {
         "username": username,
@@ -22,16 +23,12 @@ export class LoginService {
     )
   }
 
-  register(username: string, password: string) {
+  register(username: string, password: string): Observable<MessageResponse> {
     return this.httpClient.post<MessageResponse>(
       environment.apiUrl + '/register', {
         "username": username,
         "password": password
       }
     )
-  }
-
-  logout() {
-    return this.httpClient.get(environment.apiUrl + '/logout', {withCredentials: true})
   }
 }

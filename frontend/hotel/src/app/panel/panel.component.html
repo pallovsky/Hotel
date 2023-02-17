@@ -6,17 +6,19 @@
       <th scope="col">#</th>
       <th scope="col">Nazwa użytkownika</th>
       <th scope="col">Rola</th>
-      <th scope="col">Email</th>
-      <th scope="col">Ilość aktywnych gier</th>
+      <th scope="col">Usuń użytkownika</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let user of users; index as i">
-      <th scope="row">{{i}}</th>
+      <th scope="row">{{i+1}}</th>
       <td>{{user.username}}</td>
       <td>{{user.role}}</td>
-      <td>{{user.email}}</td>
-      <td>{{user.games_count}}</td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteUser(user.id)">
+          Usuń
+        </button>
+      </td>
     </tr>
     </tbody>
   </table>

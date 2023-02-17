@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.agh.hotel.dto.request.LoginRequest;
-import pl.edu.agh.hotel.dto.request.RegisterRequest;
-import pl.edu.agh.hotel.dto.response.MessageResponse;
 import pl.edu.agh.hotel.dto.response.TokenResponse;
-import pl.edu.agh.hotel.exceptions.BadRequestException;
 import pl.edu.agh.hotel.exceptions.UnauthorizedException;
 import pl.edu.agh.hotel.model.Token;
 import pl.edu.agh.hotel.model.User;
@@ -28,7 +25,6 @@ import java.util.UUID;
 public class AuthController {
 
     public final long TOKEN_VALIDITY_TIME = 60 * 60;
-    public final int MIN_PASSWORD_LENGTH = 4;
 
     private UserService userService;
     private TokenService tokenService;
@@ -63,20 +59,6 @@ public class AuthController {
             return ResponseEntity.ok(TokenResponse.fromToken(token));
         } else {
             throw new UnauthorizedException();
-        }
-    }
-
-    @PostMapping("/api/register")
-    public ResponseEntity<MessageResponse> register(@RequestBody RegisterRequest registerRequest) throws BadRequestException {
-        Boolean exist = userService.existsByUsername(registerRequest.getUsername());
-        boolean passwordOk = registerRequest.getPassword().length() > MIN_PASSWORD_LENGTH;
-
-        if (!exist && passwordOk) {
-            User newUser = new User(null, registerRequest.getUsername(), registerRequest.getPassword());
-            userService.save(newUser);
-            return ResponseEntity.status(201).body(new MessageResponse("User successfully registered."));
-        } else {
-            throw new BadRequestException();
         }
     }
 }

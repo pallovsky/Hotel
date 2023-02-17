@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {LoginService} from "../_service/login.service";
+import {AuthService} from "../_service/auth.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    private loginService: LoginService,
+    private authService: AuthService,
     private router: Router,
   ) {
   }
@@ -30,11 +30,11 @@ export class LoginComponent implements OnInit {
     const username = this.loginForm.value['username']?.toString()!
     const password = this.loginForm.value['password']?.toString()!
 
-    this.loginService.login(username, password).subscribe(
+    this.authService.login(username, password).subscribe(
       response => {
         localStorage.setItem('token', response.value)
         localStorage.setItem('validUntil', response.validUntil.toString())
-        this.router.navigate(['/lists'])
+        this.router.navigate(['/games'])
       },
       _ => this.failureMessage = true
     )

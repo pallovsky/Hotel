@@ -10,6 +10,7 @@ import pl.edu.agh.hotel.model.User;
 import pl.edu.agh.hotel.repository.TokenRepository;
 import pl.edu.agh.hotel.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,6 +28,16 @@ public class UserService {
     }
 
     @Transactional
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Transactional
+    public Optional<User> findById(UUID id) {
+        return userRepository.findById(id);
+    }
+
+    @Transactional
     public Optional<User> findByUsername(String username) {
         return Optional.ofNullable(userRepository.findByUsername(username));
     }
@@ -34,6 +45,9 @@ public class UserService {
     @Transactional
     public Optional<User> findByToken(String tokenString) throws UnauthorizedException {
         try {
+            if (tokenString == null) {
+                throw new UnauthorizedException();
+            }
             UUID tokenValue = UUID.fromString(tokenString);
             Token token = tokenRepository.findByValue(tokenValue);
 
@@ -56,5 +70,10 @@ public class UserService {
     @Transactional
     public void save(User user) {
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void deleteById(UUID id) {
+        userRepository.deleteById(id);
     }
 }

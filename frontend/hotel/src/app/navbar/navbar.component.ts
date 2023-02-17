@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from "../_service/login.service";
+import {AuthService} from "../_service/auth.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 export class NavbarComponent implements OnInit {
 
   constructor(
-    private loginService: LoginService,
+    private authService: AuthService,
     private router: Router,
   ) { }
 
@@ -18,8 +18,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.loginService.logout().subscribe(
-      _ => this.router.navigate(['login'])
-    )
+    localStorage.clear()
+    this.router.navigate(['login'])
   }
 }

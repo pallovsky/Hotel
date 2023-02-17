@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -23,4 +24,19 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "role")
+    private String role;
+
+    @ManyToMany
+    @JoinTable(
+            name = "User_Games",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "game_id")
+    )
+    private List<Game> games;
+
+    public Boolean isAdmin() {
+        return role.equals("ADMIN");
+    }
 }
