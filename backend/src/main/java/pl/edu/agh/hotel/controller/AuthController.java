@@ -56,7 +56,7 @@ public class AuthController {
             }
 
             tokenService.save(token);
-            return ResponseEntity.ok(TokenResponse.fromToken(token));
+            return ResponseEntity.ok(TokenResponse.fromToken(token, user.get().getRole()));
         } else {
             throw new UnauthorizedException();
         }

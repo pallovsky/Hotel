@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.edu.agh.hotel.exceptions.NotFoundException;
 import pl.edu.agh.hotel.exceptions.UnauthorizedException;
 import pl.edu.agh.hotel.model.Token;
 import pl.edu.agh.hotel.model.User;
@@ -35,6 +36,18 @@ public class UserService {
     @Transactional
     public Optional<User> findById(UUID id) {
         return userRepository.findById(id);
+    }
+
+
+    @Transactional
+    public User getById(UUID userId) throws NotFoundException {
+        Optional<User> optionalUser = findById(userId);
+
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        } else {
+            throw new NotFoundException();
+        }
     }
 
     @Transactional

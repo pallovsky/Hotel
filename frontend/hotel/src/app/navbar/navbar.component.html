@@ -3,10 +3,10 @@
     <img class="main-icon" src="../../assets/icons/hotel.png" alt=""/>
     <a class="navbar-brand app-name" href="#">Hotel</a>
 
-    <div *ngIf="false" class="container-fluid justify-content-center collapse navbar-collapse" id="start-nav">
-      <ul class="navbar-nav m-auto">
-        <img class="menu-icon" src="assets/icons/admin.png" alt=""/>
-        <li class="nav-item">
+    <div class="container-fluid justify-content-center collapse navbar-collapse" id="start-nav">
+      <ul *ngIf="isLoggedIn$ | async"  class="navbar-nav m-auto">
+        <img *ngIf="isAdmin$ | async" class="menu-icon" src="assets/icons/admin.png" alt=""/>
+        <li *ngIf="isAdmin$ | async" class="nav-item">
           <a class="nav-link" routerLink="panel">Panel administratora</a>
         </li>
 
@@ -15,9 +15,19 @@
           <a class="nav-link" routerLink="games">Lista gier</a>
         </li>
       </ul>
+
+      <ul class="navbar-nav">
+        <li class="nav-item" *ngIf="!(isLoggedIn$ | async)">
+          <a class="nav-link" href="login"><u>Zaloguj</u></a>
+        </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn$ | async">
+          <a class="nav-link" (click)="logout()"><u>Wyloguj</u></a>
+        </li>
+      </ul>
     </div>
 
-    <div *ngIf="true" class="container-fluid justify-content-center collapse navbar-collapse" id="game-nav">
+    <div *ngIf="false" class="container-fluid justify-content-center collapse navbar-collapse" id="game-nav">
       <ul class="navbar-nav m-auto">
         <img class="menu-icon" src="../../assets/icons/email.png" alt=""/>
         <li class="nav-item active">
@@ -57,18 +67,6 @@
         <img class="menu-icon" src="../../assets/icons/send.png" alt=""/>
         <li class="nav-item">
           <a class="nav-link"><u>Wyślij</u></a>
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="login"><u>Zaloguj</u></a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" (click)="logout()"><u>Wyloguj</u></a>
         </li>
       </ul>
     </div>

@@ -5,14 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.edu.agh.hotel.model.Game;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameResponse {
+    private UUID id;
     private String name;
+    private String type;
     private Integer usersCount;
 
     public static GameResponse from(Game game) {
-        return new GameResponse(game.getName(), game.getUsers().size());
+        return new GameResponse(game.getId(), game.getName(), game.getType(), game.getUsers().size());
     }
 }

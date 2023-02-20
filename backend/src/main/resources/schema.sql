@@ -17,7 +17,8 @@ CREATE TABLE Tokens
 CREATE TABLE Games
 (
     id   UUID    NOT NULL PRIMARY KEY,
-    name VARCHAR NOT NULL
+    name VARCHAR NOT NULL,
+    type VARCHAR NOT NULL
 );
 
 CREATE TABLE User_Games

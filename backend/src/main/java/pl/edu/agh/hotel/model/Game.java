@@ -22,6 +22,9 @@ public class Game {
     @Column(name = "name", unique = true)
     private String name;
 
+    @Column(name = "type")
+    private String type;
+
     @ManyToMany
     @JoinTable(
             name = "User_Games",

@@ -31,11 +31,7 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.value['password']?.toString()!
 
     this.authService.login(username, password).subscribe(
-      response => {
-        localStorage.setItem('token', response.value)
-        localStorage.setItem('validUntil', response.validUntil.toString())
-        this.router.navigate(['/games'])
-      },
+      _ => this.router.navigate(['/games']),
       _ => this.failureMessage = true
     )
   }

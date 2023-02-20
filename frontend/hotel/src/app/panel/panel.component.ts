@@ -26,7 +26,8 @@ export class PanelComponent implements OnInit {
     }
 
     this.userService.getUsers(this.token).subscribe(
-      response => this.users = response
+      response => this.users = response,
+      _ => this.router.navigate(['/login'])
     )
   }
 
@@ -36,7 +37,7 @@ export class PanelComponent implements OnInit {
 
   deleteUser(id: string) {
     this.userService.deleteUser(id, this.token).subscribe(
-      _ => window.location.reload()
+      _ => window.location. reload()
     )
   }
 }

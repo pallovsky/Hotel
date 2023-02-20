@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.agh.hotel.dto.request.NewGameRequest;
+import pl.edu.agh.hotel.dto.response.MessageResponse;
+import pl.edu.agh.hotel.exceptions.ForbiddenException;
+import pl.edu.agh.hotel.exceptions.NotFoundException;
 import pl.edu.agh.hotel.exceptions.UnauthorizedException;
 import pl.edu.agh.hotel.model.Game;
 import pl.edu.agh.hotel.model.User;
@@ -12,9 +16,7 @@ import pl.edu.agh.hotel.model.response.GameResponse;
 import pl.edu.agh.hotel.service.GameService;
 import pl.edu.agh.hotel.service.UserService;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -31,7 +33,7 @@ public class GameController {
 
     @GetMapping("/api/games")
     public ResponseEntity<List<GameResponse>> getUsers(
-            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String token) throws UnauthorizedException {
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String token) throws UnauthorizedException, ForbiddenException {
         Optional<User> currentUser = userService.findByToken(token);
 
         if (currentUser.isPresent()) {
@@ -46,20 +48,28 @@ public class GameController {
                 return ResponseEntity.ok(games.stream().map(GameResponse::from).toList());
             }
         } else {
-            return ResponseEntity.status(403).body(Collections.emptyList());
+            throw new ForbiddenException();
         }
     }
 
     @PostMapping("/api/games")
-    public ResponseEntity<List<GameResponse>> getUsers(
+    public ResponseEntity<MessageResponse> createGame(
             @RequestBody NewGameRequest request,
-            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String token) throws UnauthorizedException {
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String token) throws UnauthorizedException, NotFoundException, ForbiddenException {
         Optional<User> currentUser = userService.findByToken(token);
 
-        if (currentUser.isPresent()) {
+        if (currentUser.isPresent() && currentUser.get().isAdmin()) {
+            List<User> users = new ArrayList<>();
+            for (UUID userId : request.getUsers()) {
+                User byId = userService.getById(userId);
+                users.add(byId);
+            }
+            Game game = new Game(null, request.getName(), request.getType(), users);
+            gameService.save(game);
 
+            return ResponseEntity.status(201).body(new MessageResponse("Game was created."));
         } else {
-            return ResponseEntity.status(403).body(Collections.emptyList());
+            throw new ForbiddenException();
         }
     }
 }

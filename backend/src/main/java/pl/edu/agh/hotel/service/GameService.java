@@ -23,4 +23,9 @@ public class GameService {
     public List<Game> findAll() {
         return gameRepository.findAll();
     }
+
+    @Transactional
+    public void save(Game game) {
+        gameRepository.save(game);
+    }
 }

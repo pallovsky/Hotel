@@ -1,1 +1,28 @@
-<p>games works!</p>
+<div class="container">
+  <h3 class="mt-5">Lista gier:</h3>
+  <table class="table mt-2">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nazwa gry</th>
+      <th scope="col">Typ</th>
+      <th scope="col">Liczba graczy</th>
+
+      <th scope="col">Usuń użytkownika</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let game of games; index as i">
+      <th scope="row">{{i+1}}</th>
+      <td>{{game.name}}</td>
+      <td>{{game.type}}</td>
+      <td>{{game.usersCount}}</td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteGame(game.id)">
+          Usuń
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
