@@ -11,9 +11,11 @@ import pl.edu.agh.hotel.exceptions.ForbiddenException;
 import pl.edu.agh.hotel.exceptions.NotFoundException;
 import pl.edu.agh.hotel.exceptions.UnauthorizedException;
 import pl.edu.agh.hotel.model.Game;
+import pl.edu.agh.hotel.model.Round;
 import pl.edu.agh.hotel.model.User;
 import pl.edu.agh.hotel.model.response.GameResponse;
 import pl.edu.agh.hotel.service.GameService;
+import pl.edu.agh.hotel.service.RoundService;
 import pl.edu.agh.hotel.service.UserService;
 
 import java.util.*;
@@ -24,15 +26,40 @@ import java.util.*;
 public class GameController {
     private GameService gameService;
     private UserService userService;
+    private RoundService roundService;
 
     @Autowired
-    public GameController(UserService userService, GameService gameService) {
+    public GameController(UserService userService, GameService gameService, RoundService roundService) {
         this.userService = userService;
         this.gameService = gameService;
+        this.roundService = roundService;
+    }
+
+    @GetMapping("/api/games/{gameId}")
+    public ResponseEntity<GameResponse> getGame(
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String token,
+            @PathVariable UUID gameId) throws UnauthorizedException, ForbiddenException {
+        Optional<User> currentUser = userService.findByToken(token);
+        Optional<Game> game = gameService.findById(gameId);
+
+        if (currentUser.isPresent() && game.isPresent()) {
+            if (currentUser.get().isAdmin()) {
+                return ResponseEntity.ok(GameResponse.from(game.get()));
+            } else {
+                List<Game> games = currentUser.get().getGames();
+                if (games.contains(game.get())) {
+                    return ResponseEntity.ok(GameResponse.from(game.get()));
+                } else {
+                    throw new ForbiddenException();
+                }
+            }
+        } else {
+            throw new ForbiddenException();
+        }
     }
 
     @GetMapping("/api/games")
-    public ResponseEntity<List<GameResponse>> getUsers(
+    public ResponseEntity<List<GameResponse>> getGames(
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String token) throws UnauthorizedException, ForbiddenException {
         Optional<User> currentUser = userService.findByToken(token);
 
@@ -64,8 +91,11 @@ public class GameController {
                 User byId = userService.getById(userId);
                 users.add(byId);
             }
-            Game game = new Game(null, request.getName(), request.getType(), users);
+            Game game = new Game(null, request.getName(), request.getType(), 1, Collections.emptyList(), users);
             gameService.save(game);
+
+            List<Round> rounds = users.stream().map(user -> new Round(null, user, game, 1)).toList();
+            roundService.saveAll(rounds);
 
             return ResponseEntity.status(201).body(new MessageResponse("Game was created."));
         } else {

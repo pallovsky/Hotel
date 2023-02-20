@@ -17,10 +17,11 @@ import { ErrorsComponent } from './errors/errors.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { UsersComponent } from './users/users.component';
-import { NavbarGameComponent } from './navbar-game/navbar-game.component';
+import { NavbarGameComponent } from './games/navbar-game/navbar-game.component';
 import { GamesComponent } from './games/games.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
 import { AddGameComponent } from './games/add-game/add-game.component';
+import { GameHomeComponent } from './games/game-home/game-home.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AddGameComponent } from './games/add-game/add-game.component';
     NavbarGameComponent,
     GamesComponent,
     AddUserComponent,
-    AddGameComponent
+    AddGameComponent,
+    GameHomeComponent
   ],
     imports: [
         BrowserModule,

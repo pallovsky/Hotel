@@ -15,6 +15,14 @@ export class GameService {
   ) {
   }
 
+  getGame(token: string, gameId: string): Observable<Game> {
+    const headers = new HttpHeaders().set('Authorization', token);
+
+    return this.httpClient.get<Game>(environment.apiUrl + '/games/' + gameId, {
+      'headers': headers
+    })
+  }
+
   getGames(token: string): Observable<Game[]> {
     const headers = new HttpHeaders().set('Authorization', token);
 

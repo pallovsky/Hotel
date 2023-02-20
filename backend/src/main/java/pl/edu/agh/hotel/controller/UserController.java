@@ -20,15 +20,11 @@ import java.util.*;
 @NoArgsConstructor
 public class UserController {
 
-    private Integer MIN_PASSWORD_LENGTH = 3;
-
     private UserService userService;
-    private TokenService tokenService;
 
     @Autowired
-    public UserController(UserService userService, TokenService tokenService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.tokenService = tokenService;
     }
 
     @GetMapping("/api/users")
@@ -77,7 +73,7 @@ public class UserController {
                 return ResponseEntity.status(400).body(new MessageResponse("Invalid request"));
             }
 
-            User user = new User(null, request.getUsername(), request.getPassword(), request.getRole(), Collections.emptyList());
+            User user = new User(null, request.getUsername(), request.getPassword(), request.getRole(), Collections.emptyList(), Collections.emptyList());
             userService.save(user);
 
             return ResponseEntity.status(201).body(new MessageResponse("User created"));

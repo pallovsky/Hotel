@@ -9,8 +9,11 @@
       <th scope="col">Nazwa gry</th>
       <th scope="col">Typ</th>
       <th scope="col">Liczba graczy</th>
+      <th scope="col">Runda</th>
+      <th scope="col">Graj</th>
 
-      <th scope="col">Usuń użytkownika</th>
+      <th *ngIf="isAdmin$ | async" scope="col">Następna runda</th>
+      <th *ngIf="isAdmin$ | async" scope="col">Usuń grę</th>
     </tr>
     </thead>
     <tbody>
@@ -19,7 +22,18 @@
       <td>{{game.name}}</td>
       <td>{{game.type}}</td>
       <td>{{game.usersCount}}</td>
+      <td>{{game.globalRound}}</td>
       <td>
+        <a class="btn btn-primary" (click)="onPlay(game.id)">
+          Graj!
+        </a>
+      </td>
+      <td *ngIf="isAdmin$ | async">
+        <a class="btn btn-secondary" (click)="onNextRound(game.id)">
+          Następna runda
+        </a>
+      </td>
+      <td *ngIf="isAdmin$ | async">
         <button class="btn btn-danger" (click)="deleteGame(game.id)">
           Usuń
         </button>

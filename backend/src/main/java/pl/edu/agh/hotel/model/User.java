@@ -28,6 +28,9 @@ public class User {
     @Column(name = "role")
     private String role;
 
+    @OneToMany(mappedBy="user")
+    private List<Round> rounds;
+
     @ManyToMany
     @JoinTable(
             name = "User_Games",

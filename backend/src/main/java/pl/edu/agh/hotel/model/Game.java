@@ -25,6 +25,12 @@ public class Game {
     @Column(name = "type")
     private String type;
 
+    @Column(name = "round")
+    private Integer globalRound;
+
+    @OneToMany(mappedBy="game")
+    private List<Round> rounds;
+
     @ManyToMany
     @JoinTable(
             name = "User_Games",

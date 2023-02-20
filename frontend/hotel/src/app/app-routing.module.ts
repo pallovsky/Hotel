@@ -13,21 +13,23 @@ import {GamesComponent} from "./games/games.component";
 import {UsersComponent} from "./users/users.component";
 import {AddUserComponent} from "./users/add-user/add-user.component";
 import {AddGameComponent} from "./games/add-game/add-game.component";
+import {GameHomeComponent} from "./games/game-home/game-home.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
+  { path: "login", component: LoginComponent },
   { path: "users", component: UsersComponent },
   { path: "users/add", component: AddUserComponent },
   { path: "games", component: GamesComponent },
   { path: "games/add", component: AddGameComponent },
-  { path: "login", component: LoginComponent },
-  { path: "mission", component: MissionComponent },
-  { path: "email", component: EmailComponent },
-  { path: "company-name", component: CompanyNameComponent },
-  { path: "offer", component: OfferComponent },
-  { path: "investments", component: InvestmentsComponent },
-  { path: "finance", component: FinanceComponent },
-  { path: "errors", component: ErrorsComponent },
+  { path: "games/:gameId", component: GameHomeComponent },
+  { path: "games/:gameId/mission", component: MissionComponent },
+  { path: "games/:gameId/email", component: EmailComponent },
+  { path: "games/:gameId/company-name", component: CompanyNameComponent },
+  { path: "games/:gameId/offer", component: OfferComponent },
+  { path: "games/:gameId/investments", component: InvestmentsComponent },
+  { path: "games/:gameId/finance", component: FinanceComponent },
+  { path: "games/:gameId/errors", component: ErrorsComponent },
 ];
 
 @NgModule({

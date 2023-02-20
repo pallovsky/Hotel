@@ -15,8 +15,9 @@ public class GameResponse {
     private String name;
     private String type;
     private Integer usersCount;
+    private Integer globalRound;
 
     public static GameResponse from(Game game) {
-        return new GameResponse(game.getId(), game.getName(), game.getType(), game.getUsers().size());
+        return new GameResponse(game.getId(), game.getName(), game.getType(), game.getUsers().size(), game.getGlobalRound());
     }
 }

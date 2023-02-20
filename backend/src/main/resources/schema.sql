@@ -16,13 +16,22 @@ CREATE TABLE Tokens
 
 CREATE TABLE Games
 (
-    id   UUID    NOT NULL PRIMARY KEY,
-    name VARCHAR NOT NULL,
-    type VARCHAR NOT NULL
+    id    UUID    NOT NULL PRIMARY KEY,
+    name  VARCHAR NOT NULL,
+    type  VARCHAR NOT NULL,
+    round INT     NOT NULL
 );
 
 CREATE TABLE User_Games
 (
     user_id UUID,
     game_id UUID
+);
+
+CREATE TABLE Rounds
+(
+    id      UUID NOT NULL PRIMARY KEY,
+    user_id UUID,
+    game_id UUID,
+    round   INT  NOT NULL
 );

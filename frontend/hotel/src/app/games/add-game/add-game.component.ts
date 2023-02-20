@@ -38,15 +38,19 @@ export class AddGameComponent implements OnInit {
     }
 
     this.userService.getUsers(this.token).subscribe(
-      response => this.users = response
+      response => this.users = response,
+      _ => this.router.navigate(['login'])
     )
   }
 
   onSubmit() {
     const name = this.addGameForm.value['name']?.toString()
     const type = this.addGameForm.value['type']?.toString()
-    const users = this.addGameForm.value['users']
+    let users = this.addGameForm.value['users']
 
+    if (users == "") {
+      users = []
+    }
     this.gameService.createGame(this.token, name, type, users).subscribe(
       _ => this.router.navigate(['games'])
     )
