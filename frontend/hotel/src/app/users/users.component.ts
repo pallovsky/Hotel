@@ -4,11 +4,11 @@ import {UserService} from "../_service/user.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-panel',
-  templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.scss']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss']
 })
-export class PanelComponent implements OnInit {
+export class UsersComponent implements OnInit {
 
   token: string = ''
   users: User[] = [];

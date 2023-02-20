@@ -7,7 +7,7 @@
       <ul *ngIf="isLoggedIn$ | async"  class="navbar-nav m-auto">
         <img *ngIf="isAdmin$ | async" class="menu-icon" src="assets/icons/admin.png" alt=""/>
         <li *ngIf="isAdmin$ | async" class="nav-item">
-          <a class="nav-link" routerLink="panel">Panel administratora</a>
+          <a class="nav-link" routerLink="users">Panel administratora</a>
         </li>
 
         <img class="menu-icon" src="assets/icons/games.png" alt=""/>

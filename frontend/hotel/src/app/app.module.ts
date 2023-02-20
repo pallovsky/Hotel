@@ -16,9 +16,11 @@ import { FinanceComponent } from './finance/finance.component';
 import { ErrorsComponent } from './errors/errors.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import { PanelComponent } from './panel/panel.component';
+import { UsersComponent } from './users/users.component';
 import { NavbarGameComponent } from './navbar-game/navbar-game.component';
 import { GamesComponent } from './games/games.component';
+import { AddUserComponent } from './users/add-user/add-user.component';
+import { AddGameComponent } from './games/add-game/add-game.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +35,11 @@ import { GamesComponent } from './games/games.component';
     InvestmentsComponent,
     FinanceComponent,
     ErrorsComponent,
-    PanelComponent,
+    UsersComponent,
     NavbarGameComponent,
-    GamesComponent
+    GamesComponent,
+    AddUserComponent,
+    AddGameComponent
   ],
     imports: [
         BrowserModule,

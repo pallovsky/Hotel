@@ -1,0 +1,37 @@
+<form [formGroup]="addUserForm">
+  <div class="container">
+    <div class="row form-outline mt-5 mb-4 text-center justify-content-center">
+      <h2>Add new user</h2>
+    </div>
+
+    <div class="row form-outline mt-5 mb-4 text-center justify-content-center">
+      <div class="col-3">
+        <input type="email" id="email" class="form-control" formControlName="username"/>
+        <label class="form-label" for="email">Username</label>
+      </div>
+    </div>
+
+    <div class="row form-outline mb-4 text-center justify-content-center">
+      <div class="col-3">
+        <input type="password" id="password" class="form-control" formControlName="password"/>
+        <label class="form-label" for="password">Password</label>
+      </div>
+    </div>
+
+    <div class="row form-outline mb-4 text-center justify-content-center">
+      <div class="col-3">
+        <select id="role" class="form-control" formControlName="role" required>
+          <option value="volvo">ADMIN</option>
+          <option value="saab">USER</option>
+        </select>
+        <label class="form-label" for="role">Role</label>
+      </div>
+    </div>
+
+    <div class="row text-center justify-content-center">
+      <div class="col-3">
+        <button type="button" class="btn btn-primary btn-block mb-4" (click)="onSubmit()">Dodaj użytkownika</button>
+      </div>
+    </div>
+  </div>
+</form>

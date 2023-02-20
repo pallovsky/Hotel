@@ -1,0 +1,40 @@
+<form [formGroup]="addGameForm">
+  <div class="container">
+    <div class="row form-outline mt-5 mb-4 text-center justify-content-center">
+      <h2>Add new game</h2>
+    </div>
+
+    <div class="row form-outline mt-5 mb-4 text-center justify-content-center">
+      <div class="col-3">
+        <input type="name" id="name" class="form-control" formControlName="name"/>
+        <label class="form-label" for="name">Nazwa</label>
+      </div>
+    </div>
+
+    <div class="row form-outline mb-4 text-center justify-content-center">
+      <div class="col-3">
+        <select id="type" class="form-control" formControlName="type" required>
+          <option value="Standard">Standard</option>
+        </select>
+        <label class="form-label" for="type">Typ</label>
+      </div>
+    </div>
+
+    <div class="row form-outline mb-4 text-center justify-content-center">
+      <div class="col-3">
+        <select id="users" class="form-control form-select" formControlName="users" multiple required>
+          <ng-container *ngFor="let user of users">
+            <option value="{{user.id}}">{{user.username}}</option>
+          </ng-container>
+        </select>
+        <label class="form-label" for="users">Użytkownicy</label>
+      </div>
+    </div>
+
+    <div class="row text-center justify-content-center">
+      <div class="col-3">
+        <button type="button" class="btn btn-primary btn-block mb-4" (click)="onSubmit()">Dodaj grę</button>
+      </div>
+    </div>
+  </div>
+</form>

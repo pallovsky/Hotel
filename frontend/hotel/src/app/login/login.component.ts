@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
-    remember: new FormControl(''),
+    role: new FormControl(''),
   });
 
   constructor(

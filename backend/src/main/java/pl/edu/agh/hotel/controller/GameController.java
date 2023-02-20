@@ -72,4 +72,26 @@ public class GameController {
             throw new ForbiddenException();
         }
     }
+
+    @DeleteMapping("api/games/{gameId}")
+    public ResponseEntity<MessageResponse> deleteGame(
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String token,
+            @PathVariable UUID gameId
+    ) throws UnauthorizedException {
+        Optional<User> currentUser = userService.findByToken(token);
+
+        if (currentUser.isPresent() && currentUser.get().isAdmin()) {
+            Optional<Game> existingGame = gameService.findById(gameId);
+
+            if (existingGame.isEmpty()) {
+                return ResponseEntity.status(400).body(new MessageResponse("Invalid request"));
+            }
+
+            gameService.deleteById(gameId);
+
+            return ResponseEntity.status(204).body(new MessageResponse("User deleted"));
+        } else {
+            throw new UnauthorizedException();
+        }
+    }
 }

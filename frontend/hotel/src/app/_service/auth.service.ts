@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {LoginRequest} from "../_requests/login-request";
 import {TokenResponse} from "../_models/token-response";
@@ -44,18 +44,22 @@ export class AuthService {
 
         this.loggedIn.next(true)
         if (response.role == 'ADMIN') {
-          console.log('xdddddddddd')
           this.admin.next(true)
         }
       })
     )
   }
 
-  register(username: string, password: string): Observable<MessageResponse> {
+  register(token: string, username: string, password: string, role: string): Observable<MessageResponse> {
+    const headers = new HttpHeaders().set('Authorization', token);
+
     return this.httpClient.post<MessageResponse>(
-      environment.apiUrl + '/register', {
+      environment.apiUrl + '/users', {
         "username": username,
-        "password": password
+        "password": password,
+        "role": role
+      }, {
+        'headers': headers
       }
     )
   }

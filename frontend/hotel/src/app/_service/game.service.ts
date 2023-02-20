@@ -12,7 +12,8 @@ export class GameService {
 
   constructor(
     private httpClient: HttpClient
-  ) { }
+  ) {
+  }
 
   getGames(token: string): Observable<Game[]> {
     const headers = new HttpHeaders().set('Authorization', token);
@@ -28,5 +29,18 @@ export class GameService {
     return this.httpClient.delete<MessageResponse>(environment.apiUrl + '/games/' + id, {
       'headers': headers
     })
+  }
+
+  createGame(token: string, name: string, type: string, users: string[]): Observable<MessageResponse> {
+    const headers = new HttpHeaders().set('Authorization', token);
+
+    return this.httpClient.post<MessageResponse>(environment.apiUrl + '/games', {
+        "name": name,
+        "type": type,
+        "users": users
+      },
+      {
+        'headers': headers
+      })
   }
 }

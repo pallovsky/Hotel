@@ -10,12 +10,16 @@ import {InvestmentsComponent} from "./investments/investments.component";
 import {FinanceComponent} from "./finance/finance.component";
 import {ErrorsComponent} from "./errors/errors.component";
 import {GamesComponent} from "./games/games.component";
-import {PanelComponent} from "./panel/panel.component";
+import {UsersComponent} from "./users/users.component";
+import {AddUserComponent} from "./users/add-user/add-user.component";
+import {AddGameComponent} from "./games/add-game/add-game.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "panel", component: PanelComponent },
+  { path: "users", component: UsersComponent },
+  { path: "users/add", component: AddUserComponent },
   { path: "games", component: GamesComponent },
+  { path: "games/add", component: AddGameComponent },
   { path: "login", component: LoginComponent },
   { path: "mission", component: MissionComponent },
   { path: "email", component: EmailComponent },
