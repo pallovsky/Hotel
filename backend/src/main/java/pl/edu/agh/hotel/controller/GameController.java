@@ -13,7 +13,7 @@ import pl.edu.agh.hotel.exceptions.UnauthorizedException;
 import pl.edu.agh.hotel.model.Game;
 import pl.edu.agh.hotel.model.Round;
 import pl.edu.agh.hotel.model.User;
-import pl.edu.agh.hotel.model.response.GameResponse;
+import pl.edu.agh.hotel.dto.response.GameResponse;
 import pl.edu.agh.hotel.service.GameService;
 import pl.edu.agh.hotel.service.RoundService;
 import pl.edu.agh.hotel.service.UserService;
@@ -101,8 +101,7 @@ public class GameController {
             Game game = Game.from(request, users);
             gameService.save(game);
 
-            List<Round> rounds = users.stream().map(user -> new Round(null, user, game, 1)).toList();
-            roundService.saveAll(rounds);
+            roundService.prepareFirstRound(game);
 
             return ResponseEntity.status(201).body(new MessageResponse("Game was created."));
         } else {

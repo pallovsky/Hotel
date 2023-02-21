@@ -1,4 +1,4 @@
-package pl.edu.agh.hotel.model.response;
+package pl.edu.agh.hotel.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.edu.agh.hotel.dto.request.NewUserRequest;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,6 +33,9 @@ public class User {
     @OneToMany(mappedBy="user")
     private List<Round> rounds;
 
+    @OneToMany(mappedBy="user")
+    private List<Company> companies;
+
     @ManyToMany
     @JoinTable(
             name = "User_Games",
@@ -38,6 +43,18 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "game_id")
     )
     private List<Game> games;
+
+    public static User from(NewUserRequest request) {
+        return new User(
+                null,
+                request.getUsername(),
+                request.getPassword(),
+                request.getRole(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList()
+        );
+    }
 
     public Boolean isAdmin() {
         return role.equals("ADMIN");

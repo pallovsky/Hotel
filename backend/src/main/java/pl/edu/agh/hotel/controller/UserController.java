@@ -9,8 +9,7 @@ import pl.edu.agh.hotel.dto.request.NewUserRequest;
 import pl.edu.agh.hotel.dto.response.MessageResponse;
 import pl.edu.agh.hotel.exceptions.UnauthorizedException;
 import pl.edu.agh.hotel.model.User;
-import pl.edu.agh.hotel.model.response.UserResponse;
-import pl.edu.agh.hotel.service.TokenService;
+import pl.edu.agh.hotel.dto.response.UserResponse;
 import pl.edu.agh.hotel.service.UserService;
 
 import java.util.*;
@@ -73,7 +72,7 @@ public class UserController {
                 return ResponseEntity.status(400).body(new MessageResponse("Invalid request"));
             }
 
-            User user = new User(null, request.getUsername(), request.getPassword(), request.getRole(), Collections.emptyList(), Collections.emptyList());
+            User user = User.from(request);
             userService.save(user);
 
             return ResponseEntity.status(201).body(new MessageResponse("User created"));

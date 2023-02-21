@@ -31,7 +31,7 @@ export class NavbarGameComponent implements OnInit {
   onSend() {
     this.roundService.moveUserToNextRound(localStorage.getItem('token')!, this.gameId).subscribe(
       _ => this.router.navigate(['games']),
-      _ => this.router.navigate(['login'])
+      _ => this.router.navigate(['games/' + this.gameId])
     )
   }
 }

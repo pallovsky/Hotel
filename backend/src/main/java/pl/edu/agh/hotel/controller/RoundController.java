@@ -44,7 +44,7 @@ public class RoundController {
             List<Round> rounds = roundService.getByGameId(gameId);
             Integer currentGlobalRound = game.get().getGlobalRound();
 
-            if (currentGlobalRound == game.get().getRoundLimit()) {
+            if (Objects.equals(currentGlobalRound, game.get().getRoundLimit())) {
                 return ResponseEntity.status(400).body(new MessageResponse("Round limit has been exhausted."));
             }
 
@@ -53,6 +53,7 @@ public class RoundController {
                     return ResponseEntity.status(400).body(new MessageResponse("Users are still in previous round."));
                 }
             }
+            roundService.prepareNextRound(game.get());
 
             Game gameUpdate = game.get();
             gameUpdate.setGlobalRound(game.get().getGlobalRound() + 1);

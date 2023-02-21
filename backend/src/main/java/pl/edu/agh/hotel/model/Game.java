@@ -36,6 +36,9 @@ public class Game {
     @OneToMany(mappedBy = "game")
     private List<Round> rounds;
 
+    @OneToMany(mappedBy="game")
+    private List<Company> companies;
+
     @ManyToMany
     @JoinTable(
             name = "User_Games",
@@ -51,6 +54,7 @@ public class Game {
                 request.getType(),
                 1,
                 request.getRoundLimit(),
+                Collections.emptyList(),
                 Collections.emptyList(),
                 users
         );

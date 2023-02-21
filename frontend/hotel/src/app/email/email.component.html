@@ -2,8 +2,6 @@
   <table class="table justify-content-center border">
     <thead>
     <tr>
-      <th class="text-center" scope="col">Email</th>
-      <th class="text-center" scope="col">Styczeń - runda 1</th>
       <th class="text-center" scope="col">Skrzynka pocztowa</th>
     </tr>
     </thead>
@@ -19,23 +17,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">STYCZEŃ</th>
-      <td>URZĄD SKARBOWY</td>
-      <td>Witamy nową firmę w naszej miejscowości!</td>
-      <td><button class="btn btn-dark">Zobacz</button></td>
-    </tr>
-    <tr>
-      <th scope="row">STYCZEŃ</th>
-      <td>POWIATOWY INSPEKTOR PRACY</td>
-      <td>Badania lekarskie pracowników i szkolenia BHP.</td>
-      <td><button class="btn btn-dark">Zobacz</button></td>
-    </tr>
-    <tr>
-      <th scope="row">STYCZEŃ</th>
-      <td>MENTOR</td>
-      <td>Wsparcie biznesu - Styczeń.</td>
-      <td><button class="btn btn-dark">Zobacz</button></td>
+    <tr *ngFor="let email of emails">
+      <th scope="row">{{email.month}}</th>
+      <td>{{email.from}}</td>
+      <td>{{email.topic}}</td>
+      <td><button disabled class="btn btn-dark">Zobacz</button></td>
     </tr>
     </tbody>
   </table>
