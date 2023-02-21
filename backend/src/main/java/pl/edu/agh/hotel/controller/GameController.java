@@ -44,11 +44,18 @@ public class GameController {
 
         if (currentUser.isPresent() && game.isPresent()) {
             if (currentUser.get().isAdmin()) {
-                return ResponseEntity.ok(GameResponse.from(game.get()));
+                GameResponse response = GameResponse.from(game.get());
+                response.setUserRound(game.get().getGlobalRound());
+
+                return ResponseEntity.ok(response);
             } else {
                 List<Game> games = currentUser.get().getGames();
                 if (games.contains(game.get())) {
-                    return ResponseEntity.ok(GameResponse.from(game.get()));
+                    Integer userRound = roundService.getByGameIdAndUserId(gameId, currentUser.get().getId()).getRound();
+                    GameResponse response = GameResponse.from(game.get());
+                    response.setUserRound(userRound);
+
+                    return ResponseEntity.ok(response);
                 } else {
                     throw new ForbiddenException();
                 }
@@ -91,7 +98,7 @@ public class GameController {
                 User byId = userService.getById(userId);
                 users.add(byId);
             }
-            Game game = new Game(null, request.getName(), request.getType(), 1, Collections.emptyList(), users);
+            Game game = Game.from(request, users);
             gameService.save(game);
 
             List<Round> rounds = users.stream().map(user -> new Round(null, user, game, 1)).toList();

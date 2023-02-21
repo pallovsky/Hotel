@@ -18,6 +18,7 @@ export class AddGameComponent implements OnInit {
     name: new FormControl(''),
     type: new FormControl(''),
     users: new FormControl(''),
+    roundLimit: new FormControl(''),
   });
   users: User[] = [];
 
@@ -46,12 +47,13 @@ export class AddGameComponent implements OnInit {
   onSubmit() {
     const name = this.addGameForm.value['name']?.toString()
     const type = this.addGameForm.value['type']?.toString()
+    const roundLimit = this.addGameForm.value['roundLimit']?.toString()
     let users = this.addGameForm.value['users']
 
     if (users == "") {
       users = []
     }
-    this.gameService.createGame(this.token, name, type, users).subscribe(
+    this.gameService.createGame(this.token, name, type, roundLimit, users).subscribe(
       _ => this.router.navigate(['games'])
     )
   }

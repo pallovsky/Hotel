@@ -23,10 +23,10 @@ export class RoundService {
     })
   }
 
-  moveUserToNextRound(token: string, gameId: string, userId: string): Observable<MessageResponse> {
+  moveUserToNextRound(token: string, gameId: string): Observable<MessageResponse> {
     const headers = new HttpHeaders().set('Authorization', token);
 
-    return this.httpClient.post<MessageResponse>(environment.apiUrl + '/users/' + userId + '/games/' + gameId + '/nextRound', {}, {
+    return this.httpClient.post<MessageResponse>(environment.apiUrl + '/users/games/' + gameId + '/nextRound', {}, {
       'headers': headers
     })
   }

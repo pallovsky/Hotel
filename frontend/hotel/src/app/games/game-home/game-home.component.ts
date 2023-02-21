@@ -10,7 +10,7 @@ import {Game} from "../../_models/game";
 })
 export class GameHomeComponent implements OnInit {
 
-  game: Game = new Game('', '', '', 0, 0)
+  game: Game = Game.emptyGame()
   token: string = ''
 
   constructor(

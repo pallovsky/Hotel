@@ -1,6 +1,13 @@
 <div class="container mt-5 justify-content-center text-center">
+  <ng-container *ngIf="game.userRound != game.globalRound">
+    <p class="text-danger">Nie wszyscy gracze ukończyli obecną rundę.</p>
+    <p class="text-danger">Przejście do następnej rundy będzie możliwe dopiero wtedy, kiedy wszyscy gracze ukończą
+      rundę {{game.globalRound}}</p>
+  </ng-container>
+
   <h2 class="h2">Nazwa gry: {{game.name}}</h2>
   <h3 class="h3">Typ gry: {{game.type}}</h3>
   <h3 class="h3">Liczba graczy: {{game.usersCount}}</h3>
   <h3 class="h3">Obecna runda: {{game.globalRound}}</h3>
+  <h3 class="h3">Twoja runda: {{game.userRound}}</h3>
 </div>

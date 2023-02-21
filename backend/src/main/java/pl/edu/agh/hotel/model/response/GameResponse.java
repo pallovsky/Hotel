@@ -16,8 +16,10 @@ public class GameResponse {
     private String type;
     private Integer usersCount;
     private Integer globalRound;
+    private Integer roundLimit;
+    private Integer userRound;
 
     public static GameResponse from(Game game) {
-        return new GameResponse(game.getId(), game.getName(), game.getType(), game.getUsers().size(), game.getGlobalRound());
+        return new GameResponse(game.getId(), game.getName(), game.getType(), game.getUsers().size(), game.getGlobalRound(), game.getRoundLimit(), null);
     }
 }

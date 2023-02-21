@@ -44,6 +44,10 @@ public class RoundController {
             List<Round> rounds = roundService.getByGameId(gameId);
             Integer currentGlobalRound = game.get().getGlobalRound();
 
+            if (currentGlobalRound == game.get().getRoundLimit()) {
+                return ResponseEntity.status(400).body(new MessageResponse("Round limit has been exhausted."));
+            }
+
             for (Round round : rounds) {
                 if (round.getRound() != currentGlobalRound + 1) {
                     return ResponseEntity.status(400).body(new MessageResponse("Users are still in previous round."));
@@ -60,20 +64,19 @@ public class RoundController {
         }
     }
 
-    @PostMapping("users/{userId}/games/{gameId}/nextRound")
+    @PostMapping("/api/users/games/{gameId}/nextRound")
     public ResponseEntity<MessageResponse> moveUserToNextRound(
             @PathVariable UUID gameId,
-            @PathVariable UUID userId,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String token) throws UnauthorizedException, ForbiddenException {
         Optional<User> currentUser = userService.findByToken(token);
         Optional<Game> game = gameService.findById(gameId);
 
-        if (currentUser.isPresent() && game.isPresent() && currentUser.get().getId() == userId) {
+        if (currentUser.isPresent() && game.isPresent()) {
             if (!game.get().getUsers().contains(currentUser.get())) {
                 throw new ForbiddenException();
             }
 
-            Round round = roundService.getByGameIdAndUserId(gameId, userId);
+            Round round = roundService.getByGameIdAndUserId(gameId, currentUser.get().getId());
             Integer currentUserRound = round.getRound();
 
             if (!Objects.equals(currentUserRound, game.get().getGlobalRound())) {

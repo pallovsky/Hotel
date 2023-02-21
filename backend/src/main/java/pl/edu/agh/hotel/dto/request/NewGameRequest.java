@@ -13,5 +13,6 @@ import java.util.UUID;
 public class NewGameRequest {
     private String name;
     private String type;
+    private Integer roundLimit;
     private List<UUID> users;
 }

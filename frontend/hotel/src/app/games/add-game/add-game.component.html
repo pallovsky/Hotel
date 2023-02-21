@@ -22,6 +22,13 @@
 
     <div class="row form-outline mb-4 text-center justify-content-center">
       <div class="col-3">
+        <input value="10" type="number" id="roundLimit" class="form-control" formControlName="roundLimit"/>
+        <label class="form-label" for="roundLimit">Ilość rund</label>
+      </div>
+    </div>
+
+    <div class="row form-outline mb-4 text-center justify-content-center">
+      <div class="col-3">
         <select id="users" class="form-control form-select" formControlName="users" multiple required>
           <ng-container *ngFor="let user of users">
             <option value="{{user.id}}">{{user.username}}</option>

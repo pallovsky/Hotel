@@ -39,12 +39,13 @@ export class GameService {
     })
   }
 
-  createGame(token: string, name: string, type: string, users: string[]): Observable<MessageResponse> {
+  createGame(token: string, name: string, type: string, roundLimit: number, users: string[]): Observable<MessageResponse> {
     const headers = new HttpHeaders().set('Authorization', token);
 
     return this.httpClient.post<MessageResponse>(environment.apiUrl + '/games', {
         "name": name,
         "type": type,
+        "roundLimit": roundLimit,
         "users": users
       },
       {
