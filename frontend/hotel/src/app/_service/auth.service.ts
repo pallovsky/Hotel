@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {LoginRequest} from "../_requests/login-request";
 import {TokenResponse} from "../_models/token-response";
 import {MessageResponse} from "../_models/message-response";
 import {BehaviorSubject, Observable, tap} from "rxjs";

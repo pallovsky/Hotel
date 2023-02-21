@@ -26,6 +26,12 @@ public class Company {
     @Column(name = "mission")
     private String mission;
 
+    @Column(name = "initial_funds")
+    private Double initialFunds;
+
+    @Column(name = "funds")
+    private Double funds;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

@@ -3,9 +3,8 @@
     <table class="table justify-content-center border">
       <thead>
       <tr>
-        <th class="text-center" scope="col">Email</th>
-        <th class="text-center" scope="col">Styczeń - runda 1</th>
-        <th class="text-center" scope="col">Skrzynka pocztowa</th>
+        <th class="text-center" scope="col">Obecna nazwa firmy: {{company.name}}</th>
+        <th class="text-center" scope="col">Nazwa firmy</th>
       </tr>
       </thead>
     </table>
@@ -20,10 +19,10 @@
       </thead>
       <tr class="tr-form">
         <td class="text-center">
-          <form>
-            <input type="text" placeholder="Nazwa firmy">
+          <form [formGroup]="companyNameForm">
+            <input type="text" class="form-control" formControlName="name" placeholder="Nazwa firmy">
             <span class="input-group-btn p-3">
-            <button class="btn btn-dark">Zapisz</button>
+            <button class="btn btn-dark" (click)="onSave()">Zapisz</button>
           </span>
           </form>
         </td>

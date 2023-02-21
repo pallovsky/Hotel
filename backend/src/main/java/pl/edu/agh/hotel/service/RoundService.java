@@ -73,7 +73,8 @@ public class RoundService {
         List<Round> rounds = game.getUsers().stream().map(user -> new Round(null, user, game, 1)).toList();
         this.saveAll(rounds);
 
-        List<Company> companies = game.getUsers().stream().map(user -> new Company(null, null, null, user, game, Collections.emptyList())).toList();
+        Double initialFunds = 10_000.0;
+        List<Company> companies = game.getUsers().stream().map(user -> new Company(null, null, null, initialFunds, initialFunds, user, game, Collections.emptyList())).toList();
         companyRepository.saveAll(companies);
 
         List<Email> startingEmails = this.getEmailsForRound(1);

@@ -38,17 +38,19 @@ CREATE TABLE Rounds
 );
 CREATE TABLE Companies
 (
-    id      UUID NOT NULL PRIMARY KEY,
-    user_id UUID,
-    game_id UUID,
-    name    INT,
-    mission VARCHAR
+    id            UUID NOT NULL PRIMARY KEY,
+    user_id       UUID,
+    game_id       UUID,
+    name          VARCHAR,
+    mission       VARCHAR,
+    initial_funds FLOAT,
+    funds         FLOAT
 );
 CREATE TABLE Emails
 (
     id         UUID    NOT NULL PRIMARY KEY,
     company_id UUID    NOT NULL,
-    _month      VARCHAR NOT NULL,
+    _month     VARCHAR NOT NULL,
     source     VARCHAR NOT NULL,
     topic      VARCHAR NOT NULL,
     message    VARCHAR NOT NULL,

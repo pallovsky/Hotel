@@ -15,9 +15,10 @@ INSERT INTO Rounds(id, user_id, game_id, round)
 VALUES ('789ca34c-e3eb-4097-9047-b4bb97807bdd', 'f73ca34c-e3eb-4097-9047-b4bb97807be6',
         '123ca34c-e3eb-4097-9047-b4bb97807bdd', 1);
 
-INSERT INTO Companies(id, user_id, game_id, name, mission)
+INSERT INTO Companies(id, user_id, game_id, name, mission, initial_funds, funds)
 VALUES ('867f9c2f-dd8f-46f4-80e3-ab4cfa9efd81', 'f73ca34c-e3eb-4097-9047-b4bb97807be6',
-        '123ca34c-e3eb-4097-9047-b4bb97807bdd', null, null);
+        '123ca34c-e3eb-4097-9047-b4bb97807bdd', null, null, 10000.0, 10000.0);
 
 INSERT INTO Emails (id, company_id, _month, source, topic, message, opened)
-VALUES ('4321a34c-e3eb-4097-9047-b4bb97807bdd', '867f9c2f-dd8f-46f4-80e3-ab4cfa9efd81', 'STYCZEN', 'Source', 'Topic', 'Message', false);
+VALUES ('4321a34c-e3eb-4097-9047-b4bb97807bdd', '867f9c2f-dd8f-46f4-80e3-ab4cfa9efd81', 'STYCZEN', 'Source', 'Topic',
+        'Message', false);
