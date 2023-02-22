@@ -1,6 +1,6 @@
 <div class="container">
   <h3 class="mt-5">Lista gier:</h3>
-  <a class="btn btn-secondary" href="games/add">Dodaj grę</a>
+  <a *ngIf="isAdmin$ | async" class="btn btn-secondary" href="games/add">Dodaj grę</a>
 
   <table class="table mt-2">
     <thead class="thead-dark">

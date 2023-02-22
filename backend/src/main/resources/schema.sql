@@ -56,4 +56,26 @@ CREATE TABLE Emails
     message    VARCHAR NOT NULL,
     opened     BOOL    NOT NULL
 );
+CREATE TABLE Offers
+(
+    id         UUID    NOT NULL PRIMARY KEY,
+    company_id UUID    NOT NULL,
+    type       VARCHAR NOT NULL,
+    name       VARCHAR NOT NULL,
+    price      FLOAT   NOT NULL,
+    costs      FLOAT   NOT NULL,
+    active     BOOL    NOT NULL,
+    work_hours FLOAT   NOT NULL
+);
+CREATE TABLE Investments
+(
+    id           UUID    NOT NULL PRIMARY KEY,
+    offer_id     UUID    NOT NULL,
+    name         VARCHAR NOT NULL,
+    cost         FLOAT   NOT NULL,
+    price_change FLOAT   NOT NULL,
+    costs_change FLOAT   NOT NULL,
+    active       BOOL    NOT NULL,
+    finished     BOOL    NOT NULL
+);
 

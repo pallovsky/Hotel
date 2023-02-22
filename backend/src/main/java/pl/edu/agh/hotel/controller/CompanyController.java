@@ -11,9 +11,7 @@ import pl.edu.agh.hotel.dto.response.FundsResponse;
 import pl.edu.agh.hotel.dto.response.MessageResponse;
 import pl.edu.agh.hotel.exceptions.ForbiddenException;
 import pl.edu.agh.hotel.exceptions.UnauthorizedException;
-import pl.edu.agh.hotel.model.Company;
-import pl.edu.agh.hotel.model.Game;
-import pl.edu.agh.hotel.model.User;
+import pl.edu.agh.hotel.model.*;
 import pl.edu.agh.hotel.service.CompanyService;
 import pl.edu.agh.hotel.service.GameService;
 import pl.edu.agh.hotel.service.RoundService;
@@ -22,6 +20,7 @@ import pl.edu.agh.hotel.service.UserService;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -76,9 +75,10 @@ public class CompanyController {
             if (games.contains(game.get())) {
                 Company company = companyService.getCompanyByUserAndGame(currentUser.get(), game.get());
 
-                // calculate estimated profit and estimated losses
-                Double estimatedProfits = 15_000.0;
-                Double estimatedExpenses = 5_000.0;
+                Double estimatedProfits = company.getOffers().stream().filter(Offer::getActive).mapToDouble(Offer::getPrice).sum();
+                Double estimatedExpenses =
+                        company.getOffers().stream().filter(Offer::getActive).mapToDouble(Offer::getCosts).sum() +
+                        company.getOffers().stream().flatMap(offer -> offer.getInvestments().stream()).filter(Investment::getActive).mapToDouble(Investment::getCost).sum();
 
                 return ResponseEntity.ok(FundsResponse.from(company, estimatedProfits, estimatedExpenses));
             } else {

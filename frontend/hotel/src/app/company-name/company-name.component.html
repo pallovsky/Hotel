@@ -9,7 +9,10 @@
       </thead>
     </table>
   </div>
-  <div class="row">
+  <div class="row text-center mt-5" *ngIf="company.name != null">
+    <h2>Wybrano nazwę firmy!</h2>
+  </div>
+  <div class="row" *ngIf="company.name == null">
     <table class="table justify-content-center border">
       <thead class="bg-secondary">
       <tr>

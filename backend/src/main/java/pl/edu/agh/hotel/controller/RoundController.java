@@ -87,6 +87,8 @@ public class RoundController {
             round.setRound(round.getRound() + 1);
             roundService.save(round);
 
+            roundService.prepareRoundForUser(currentUser.get(), game.get());
+
             return ResponseEntity.ok(new MessageResponse("Round has been updated"));
         } else {
             throw new ForbiddenException();

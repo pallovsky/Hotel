@@ -1,1 +1,50 @@
-<p>investments works!</p>
+<div class="container mt-5">
+  <table class="table justify-content-center border">
+    <thead>
+    <tr>
+      <th class="text-center" scope="col">Inwestycje</th>
+    </tr>
+    </thead>
+  </table>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Obiekt</th>
+      <th scope="col">Koszt</th>
+      <th scope="col">Zmiana ceny(%)</th>
+      <th scope="col">Zmiana kosztów(%)</th>
+      <th scope="col">Aktywne</th>
+      <th scope="col">Ukończone</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let investment of investments">
+      <th scope="row">{{investment.name}}</th>
+      <td>{{investment.offerName}}</td>
+      <td>{{investment.cost}} zł</td>
+      <td>{{investment.priceChange * 100.0}}%</td>
+      <td>{{investment.costsChange * 100.0}}%</td>
+      <td>
+        <ng-container *ngIf="investment.active">
+          <img class="list-icon" src="../../assets/icons/success.png" alt=""/>
+        </ng-container>
+        <ng-container *ngIf="!investment.active">
+          <img class="list-icon" src="../../assets/icons/failure.png" alt=""/>
+        </ng-container>
+      </td>
+      <td>
+        <ng-container *ngIf="investment.finished">
+          <img class="list-icon" src="../../assets/icons/success.png" alt=""/>
+        </ng-container>
+        <ng-container *ngIf="!investment.finished">
+          <img class="list-icon" src="../../assets/icons/failure.png" alt=""/>
+        </ng-container>
+      </td>
+      <td><button (click)="onInvest(investment.id)" *ngIf="!investment.active && !investment.finished" class="btn btn-secondary">Zainwestuj!</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

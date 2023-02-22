@@ -1,1 +1,99 @@
-<p>offer works!</p>
+<div class="container">
+  <table class="table justify-content-center border mt-5">
+    <thead>
+    <tr>
+      <th class="text-center" scope="col">Moje oferty</th>
+    </tr>
+    </thead>
+  </table>
+
+  <h3 class="h2 mt-5">Oferta hotelowa:</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Nazwa oferty</th>
+      <th scope="col">Cena oferty</th>
+      <th scope="col">Koszt utrzymania</th>
+      <th scope="col">Liczba godzin pracownika</th>
+      <th scope="col">Aktywność</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let offer of hotelOffers">
+      <th scope="row">{{offer.name}}</th>
+      <td>{{offer.price | number : '1.2-2'}} zł</td>
+      <td>{{offer.costs | number : '1.2-2'}} zł</td>
+      <td>{{offer.workHours}}</td>
+      <td>
+        <ng-container *ngIf="offer.active">
+          <img class="list-icon" src="../../assets/icons/success.png" alt=""/>
+        </ng-container>
+        <ng-container *ngIf="!offer.active">
+          <img class="list-icon" src="../../assets/icons/failure.png" alt=""/>
+        </ng-container>
+      </td>
+      <td><button (click)="onChange(offer.id)" class="btn btn-dark">Zmień</button></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3 class="h2 mt-5">Oferta eventowa:</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Nazwa oferty</th>
+      <th scope="col">Cena oferty</th>
+      <th scope="col">Koszt utrzymania</th>
+      <th scope="col">Liczba godzin pracownika</th>
+      <th scope="col">Aktywność</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let offer of partyOffers">
+      <th scope="row">{{offer.name}}</th>
+      <td>{{offer.price | number : '1.2-2'}} zł</td>
+      <td>{{offer.costs | number : '1.2-2'}} zł</td>
+      <td>{{offer.workHours}}</td>
+      <td>
+        <ng-container *ngIf="offer.active">
+          <img class="list-icon" src="../../assets/icons/success.png" alt=""/>
+        </ng-container>
+        <ng-container *ngIf="!offer.active">
+          <img class="list-icon" src="../../assets/icons/failure.png" alt=""/>
+        </ng-container>
+      </td>
+      <td><button (click)="onChange(offer.id)"  class="btn btn-dark">Zmień</button></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3 class="h2 mt-5">Oferta gastronomiczna:</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Nazwa oferty</th>
+      <th scope="col">Cena oferty</th>
+      <th scope="col">Koszt utrzymania</th>
+      <th scope="col">Liczba godzin pracownika</th>
+      <th scope="col">Aktywność</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let offer of foodOffers">
+      <th scope="row">{{offer.name}}</th>
+      <td>{{offer.price | number : '1.2-2'}} zł</td>
+      <td>{{offer.costs | number : '1.2-2'}} zł</td>
+      <td>{{offer.workHours}}</td>
+      <td>
+        <ng-container *ngIf="offer.active">
+          <img class="list-icon" src="../../assets/icons/success.png" alt=""/>
+        </ng-container>
+        <ng-container *ngIf="!offer.active">
+          <img class="list-icon" src="../../assets/icons/failure.png" alt=""/>
+        </ng-container>
+      </td>
+      <td><button (click)="onChange(offer.id)" class="btn btn-dark">Zmień</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

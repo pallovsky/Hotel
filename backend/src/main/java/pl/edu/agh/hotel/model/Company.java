@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,4 +41,7 @@ public class Company {
 
     @OneToMany(mappedBy = "company")
     private List<Email> emails;
+
+    @OneToMany(mappedBy = "company")
+    private List<Offer> offers;
 }

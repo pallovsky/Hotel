@@ -9,19 +9,19 @@
     <tbody>
     <tr>
       <td>Fundusze początkowe:</td>
-      <td class="text-info">{{funds.initialFunds}} zł</td>
+      <td class="text-info">{{funds.initialFunds | number : '1.2-2'}} zł</td>
     </tr>
     <tr>
       <td>Obecne fundusze</td>
-      <td class="text-primary">{{funds.funds}} zł</td>
+      <td class="text-primary">{{funds.funds | number : '1.2-2'}} zł</td>
     </tr>
     <tr>
       <td>Oczekiwane zyski:</td>
-      <td class="text-success">{{funds.estimatedProfits}} zł</td>
+      <td class="text-success">{{funds.estimatedProfits | number : '1.2-2'}} zł</td>
     </tr>
     <tr>
       <td>Oczekiwane wydatki:</td>
-      <td class="text-warning">{{funds.estimatedExpenses}} zł</td>
+      <td class="text-warning">{{funds.estimatedExpenses | number : '1.2-2'}} zł</td>
     </tr>
     </tbody>
   </table>
