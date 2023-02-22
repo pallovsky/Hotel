@@ -5,9 +5,31 @@
       rundę {{game.globalRound}}</p>
   </ng-container>
 
-  <h2 class="h2">Nazwa gry: {{game.name}}</h2>
-  <h3 class="h3">Typ gry: {{game.type}}</h3>
-  <h3 class="h3">Liczba graczy: {{game.usersCount}}</h3>
-  <h3 class="h3">Obecna runda: {{game.globalRound}}</h3>
-  <h3 class="h3">Twoja runda: {{game.userRound}}</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <th><h3 class="h3">Nazwa gry</h3></th>
+      <th><h3 class="h3">{{game.name}}</h3></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><h3 class="h3">Typ gry</h3></td>
+      <td><h3 class="h3">{{game.type}}</h3></td>
+    </tr>
+    <tr>
+      <td><h3 class="h3">Liczba graczy</h3></td>
+      <td><h3 class="h3">{{game.usersCount}}</h3></td>
+    </tr>
+    <tr>
+      <td><h3 class="h3">Obecna runda</h3></td>
+      <td><h3 class="h3">{{game.globalRound}}</h3></td>
+    </tr>
+    <tr>
+      <td><h3 class="h3">Twoja runda</h3></td>
+      <td><h3 class="h3">{{game.userRound}}</h3></td>
+    </tr>
+    </tbody>
+  </table>
+
 </div>
