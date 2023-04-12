@@ -2,9 +2,10 @@
 
 ## Authors
 
-- Krzysztof Pala
-- Tomasz Wojakowski
-- Bartosz Nieroda
+- [Krzysztof Pala](https://github.com/pallovsky)
+- [Tomasz Wojakowski](https://github.com/Wojaqqq)
+- [Bartosz Nieroda](https://github.com/qymaensheel)
+
 
 ## Content
 This is a template application of a decision based game 'Hotel'. It allows to create games for chosen participants and manage them. The participants may take part in turn-based game, where the result is determined by their decisions. Currently only visual logic is implemented, as business logic of this game is planned to be added in the future.
